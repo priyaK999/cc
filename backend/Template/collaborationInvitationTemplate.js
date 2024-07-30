@@ -2,6 +2,9 @@ const collaborationInvitationTemplate = (name, email, query, phone) => {
     return `
 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <h2 style="color: #0056b3;">Collaboration Invitation</h2>
+    <div style="text-align: center;">
+             <img src="https://res.cloudinary.com/dvfmw4c9f/image/upload/v1722234617/logo_c_nv0icd.png" style="max-width: 150px; margin-bottom: 10px;" />
+        </div>
 
     <p>Dear Sir/Madam,</p>
 

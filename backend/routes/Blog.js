@@ -10,4 +10,6 @@ router.get('/getBlog', getBlogs);
 
 router.post('/image', uploadImage);
 
+router.delete('/deleteBlog', deleteBlog);
+
 module.exports = router;

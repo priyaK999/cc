@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createBlog, getBlogs, uploadImage } = require('../controller/BlogController');
+const { createBlog, getBlogs, deleteBlog } = require('../controller/BlogController');
 
 
 
@@ -8,8 +8,6 @@ router.post('/blogs', createBlog);
 
 router.get('/getBlog', getBlogs);
 
-router.post('/image', uploadImage);
-
-router.delete('/deleteBlog', deleteBlog);
+router.delete('/blogs/:id', deleteBlog);
 
 module.exports = router;

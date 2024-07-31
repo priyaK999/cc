@@ -97,11 +97,19 @@ exports.uploadImage = async (req, res) => {
 
 exports.getBlogs = async (req, res) => {
   try {
-    // Fetch the latest two blog posts in ascending order (oldest first)
-    const latestTwoBlogs = await Blog.find().sort({ createdAt: 1 }).limit(2);
+    // Extract the category from query parameters
+    const category = req.query.category;
 
-    // Fetch the rest of the blog posts in descending order (newest first)
-    const restOfBlogs = await Blog.find().sort({ createdAt: -1 }).skip(2);
+    let filter = {};
+    if (category) {
+      filter.category = category;
+    }
+
+    // Fetch the latest two blog posts in ascending order (oldest first) based on the category
+    const latestTwoBlogs = await Blog.find(filter).sort({ createdAt: 1 }).limit(2);
+
+    // Fetch the rest of the blog posts in descending order (newest first) based on the category
+    const restOfBlogs = await Blog.find(filter).sort({ createdAt: -1 }).skip(2);
 
     // Concatenate the two results
     const allBlogs = latestTwoBlogs.concat(restOfBlogs);

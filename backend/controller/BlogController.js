@@ -56,6 +56,29 @@ exports.uploadImage = async (req, res) => {
   }
 };
 
+
+// Delete a blog by ID
+exports.deleteBlog = async (req, res) => {
+  try {
+      const { id } = req.params;
+
+      // Find and delete the blog by its ID
+      const deletedBlog = await Blog.findByIdAndDelete(id);
+
+      // If the blog was not found, return a 404 error
+      if (!deletedBlog) {
+          return res.status(404).json({ message: 'Blog not found' });
+      }
+
+      // Return a success message
+      res.status(200).json({ message: 'Blog deleted successfully' });
+  } catch (error) {
+      // Handle any errors that occur during the deletion
+      console.error('Error deleting blog:', error);
+      res.status(500).json({ message: 'An error occurred while deleting the blog' });
+  }
+};
+
 // exports.createBlog = async (req, res) => {
 //   const { category, name, username, description,image } = req.body;
 

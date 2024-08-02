@@ -4,28 +4,28 @@ const Blog = require('../model/Blog');
 
 exports.createBlog = async (req, res) => {
   try {
-    const { category, name, username, description, image } = req.body;
+    const { category, name, username, description, detailedDescription, image } = req.body;
 
-    if (!category || !name || !username || !description || !image) {
+    if (!category || !name || !username || !description || !detailedDescription || !image) {
         return res.status(400).json({ success: false, message: 'All fields are required' });
     }
 
-    // Assuming you are saving this data to a MongoDB database
     const newBlog = new Blog({
         category,
         name,
         username,
         description,
-        image // This should be the Cloudinary URL
+        detailedDescription,
+        image 
     });
 
     await newBlog.save();
 
     res.status(200).json({ success: true, message: 'Blog created successfully!' });
-} catch (error) {
-    console.error('Error:', error); // Log detailed error
+  } catch (error) {
+    console.error('Error:', error);
     res.status(500).json({ success: false, message: 'An error occurred while creating the blog.' });
-}
+  }
 };
 
 
